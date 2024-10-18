@@ -1,0 +1,25 @@
+FROM golang:1.22 AS builder
+
+ARG ASSERTOR_REPO="https://github.com/ethpandaops/assertoor"
+ARG ASSERTOR_BRANCH="v0.0.11"
+
+RUN apt-get update && apt-get -y upgrade && apt-get install -y --no-install-recommends \
+  libssl-dev \
+  ca-certificates \
+  jq \
+  git \
+  curl \
+  make \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN git clone "${ASSERTOR_REPO}"; \
+    cd assertoor && git checkout "${ASSERTOR_BRANCH}"; \
+    git log -n 1 --format=format:"%H" > /assertoor.version
+
+RUN ls -lah /
+
+# COPY ./assertoor/tests assertoor/antithesis/tests/
+
+RUN cd assertoor && \
+    make build
