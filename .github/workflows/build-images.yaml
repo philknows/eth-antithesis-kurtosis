@@ -33,8 +33,8 @@ jobs:
         file: ./Dockerfile.config
         push: true
         tags: |
-          $REGISTRY_URL/$REGISTRY_REPOSITORY/config:antithesis-latest,
-          $REGISTRY_URL/$REGISTRY_REPOSITORY/config:${{ github.sha }}
+          ${{ secrets.DOCKER_REGISTRY_URL }}/${{ secrets.REPOSITORY }}/config:antithesis-latest,
+          ${{ secrets.DOCKER_REGISTRY_URL }}/${{ secrets.REPOSITORY }}/config:${{ github.sha }}
 
     - name: Build and push assertoor image
       uses: docker/build-push-action@v5
@@ -43,5 +43,5 @@ jobs:
         file: ./Dockerfile.assertoor
         push: true
         tags: |
-          $REGISTRY_URL/$REGISTRY_REPOSITORY/assertoor:antithesis-latest,
-          $REGISTRY_URL/$REGISTRY_REPOSITORY/assertoor:${{ github.sha }}
+          ${{ secrets.DOCKER_REGISTRY_URL }}/${{ secrets.REPOSITORY }}/assertoor:antithesis-latest,
+          ${{ secrets.DOCKER_REGISTRY_URL }}/${{ secrets.REPOSITORY }}/assertoor:${{ github.sha }}
