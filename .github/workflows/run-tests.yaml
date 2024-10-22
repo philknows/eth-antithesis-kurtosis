@@ -1,0 +1,58 @@
+name: Continous Integration (Go Services)
+
+on: 
+  workflow_dispatch:
+    inputs:
+      test:
+        description: 'Test name'
+        required: false
+        default: ''
+        type: string
+      duration:
+        description: 'Duration (exploration hours)'
+        required: true
+        type: string
+        default: "1.0"
+      description:
+        description: 'Test run description (avoid quotes, please!)'
+        required: true
+        type: string
+        default: "No description provided"
+      email:
+        description: 'Additional email notification recipient (separate with ;)'
+        required: true
+        type: string
+        default: ""
+      
+  # push:
+  #   branches:
+  #     - main  # Trigger this action on push to the main branch
+
+jobs:
+  antithesis:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - uses: actions/checkout@v4
+
+    # Run Antithesis Tests
+    - name: Run Antithesis Tests
+      uses: antithesishq/antithesis-trigger-action@main
+      with:
+        notebook_name: ethereum
+        tenant: ethereum
+        username: ${{ secrets.ANTITHESIS_USERNAME }}
+        password: ${{ secrets.ANTITHESIS_PASSWORD }}
+        github_token: ${{ secrets.GH_PAT }}
+        config_image: config@${{ github.sha }}
+        images: assertoor@${{ github.sha }};geth-assertions:antithesis-asertions;docker.io/chainsafe/lodestar:v1.22.0;
+        description: ${{ inputs.description }}
+        email_recipients: ${{ inputs.email }}
+        test_name: ${{ inputs.test}}
+        additional_parameters: |-
+          custom.configuration=ethereum-package/.github/tests/minimal.yaml
+          custom.duration = ${{ inputs.duration }}
