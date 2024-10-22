@@ -1,4 +1,4 @@
-name: Continous Integration (Go Services)
+name: Trigger Antithesis exploration
 
 on: 
   workflow_dispatch:
