@@ -29,8 +29,8 @@ jobs:
         file: ./Dockerfile.config
         push: true
         tags: |
-          config:antithesis-latest,
-          config:${{ github.sha }}
+          us-central1-docker.pkg.dev/molten-verve-216720/ethereum-repository/config:antithesis-latest,
+          us-central1-docker.pkg.dev/molten-verve-216720/ethereum-repository/config:${{ github.sha }}
 
     - name: Build and push assertoor image
       uses: docker/build-push-action@v5
@@ -39,5 +39,5 @@ jobs:
         file: ./Dockerfile.assertoor
         push: true
         tags: |
-          assertoor:antithesis-latest,
-          assertoor:${{ github.sha }}
+          us-central1-docker.pkg.dev/molten-verve-216720/ethereum-repository/assertoor:antithesis-latest,
+          us-central1-docker.pkg.dev/molten-verve-216720/ethereum-repository/assertoor:${{ github.sha }}
