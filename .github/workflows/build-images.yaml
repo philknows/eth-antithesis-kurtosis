@@ -30,7 +30,7 @@ jobs:
         push: true
         tags: |
           us-central1-docker.pkg.dev/molten-verve-216720/ethereum-repository/config:antithesis-latest,
-          us-central1-docker.pkg.dev/molten-verve-216720/ethereum-repository/config:${{ github.sha }}
+          ${{ secrets.DOCKER_REGISTRY_URL }}/${{ secrets.REPOSITORY }}/config:${{ github.sha }}
 
     - name: Build and push assertoor image
       uses: docker/build-push-action@v5
