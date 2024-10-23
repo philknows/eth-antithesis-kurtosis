@@ -48,8 +48,8 @@ jobs:
         username: ${{ secrets.ANTITHESIS_USERNAME }}
         password: ${{ secrets.ANTITHESIS_PASSWORD }}
         github_token: ${{ secrets.GH_PAT }}
-        config_image: config@${{ github.sha }}
-        images: assertoor@${{ github.sha }};geth-assertions:antithesis-asertions;docker.io/chainsafe/lodestar:v1.22.0;
+        config_image: config:${{ github.sha }}
+        images: assertoor:${{ github.sha }};geth-assertions:antithesis-asertions;docker.io/chainsafe/lodestar:v1.22.0;
         description: ${{ inputs.description }}
         email_recipients: ${{ inputs.email }}
         test_name: ${{ inputs.test}}
