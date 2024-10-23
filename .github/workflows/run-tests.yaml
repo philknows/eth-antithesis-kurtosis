@@ -33,6 +33,10 @@ on:
   #   branches:
   #     - main  # Trigger this action on push to the main branch
 
+env:
+  REGISTRY: us-central1-docker.pkg.dev
+  REPOSITORY: molten-verve-216720/ethereum-repository
+
 jobs:
   antithesis:
     runs-on: ubuntu-latest
@@ -53,8 +57,8 @@ jobs:
         username: ${{ secrets.ANTITHESIS_USERNAME }}
         password: ${{ secrets.ANTITHESIS_PASSWORD }}
         github_token: ${{ secrets.GH_PAT }}
-        config_image: config:${{ github.sha }}
-        images: assertoor:${{ github.sha }};geth-assertions:antithesis-asertions;docker.io/chainsafe/lodestar:v1.22.0;
+        config_image: ${{ env.REGISTRY }}/${{ env.REPOSITORY}}/config:${{ github.sha }}
+        images: ${{ env.REGISTRY }}/${{ env.REPOSITORY}}/assertoor:${{ github.sha }};${{ env.REGISTRY }}/${{ env.REPOSITORY}}/geth:antithesis-assertions;docker.io/chainsafe/lodestar:v1.22.0;
         description: ${{ inputs.description }}
         email_recipients: ${{ inputs.email }}
         test_name: ${{ inputs.test}}
