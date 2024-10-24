@@ -17,7 +17,7 @@ on:
         description: 'Configuration file'
         required: true
         type: string
-        default: "./github/tests/minimal.yaml"
+        default: ".github/tests/minimal.yaml"
       description:
         description: 'Test run description (avoid quotes, please!)'
         required: true
