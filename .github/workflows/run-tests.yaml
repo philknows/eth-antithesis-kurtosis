@@ -1,5 +1,9 @@
 name: Trigger Antithesis exploration
 
+env:
+  REGISTRY: us-central1-docker.pkg.dev
+  REPOSITORY: molten-verve-216720/ethereum-repository
+
 on: 
   workflow_dispatch:
     inputs:
@@ -7,6 +11,16 @@ on:
         description: 'Test name'
         required: false
         default: ''
+        type: string
+      config_image:
+        description: 'Config image'
+        required: true
+        default: ${{ env.REGISTRY }}/${{ env.REPOSITORY}}/config:antithesis-latest
+        type: string
+      images:
+        description: 'System images'
+        required: true
+        default: ${{ env.REGISTRY }}/${{ env.REPOSITORY}}/assertoor:antithesis-lates;${{ env.REGISTRY }}/${{ env.REPOSITORY}}/geth:antithesis-assertions;docker.io/chainsafe/lodestar:v1.22.0
         type: string
       duration:
         description: 'Duration (exploration hours)'
@@ -33,10 +47,6 @@ on:
   #   branches:
   #     - main  # Trigger this action on push to the main branch
 
-env:
-  REGISTRY: us-central1-docker.pkg.dev
-  REPOSITORY: molten-verve-216720/ethereum-repository
-
 jobs:
   antithesis:
     runs-on: ubuntu-latest
@@ -57,8 +67,8 @@ jobs:
         username: ${{ secrets.ANTITHESIS_USERNAME }}
         password: ${{ secrets.ANTITHESIS_PASSWORD }}
         github_token: ${{ secrets.GH_PAT }}
-        config_image: ${{ env.REGISTRY }}/${{ env.REPOSITORY}}/config:${{ github.sha }}
-        images: ${{ env.REGISTRY }}/${{ env.REPOSITORY}}/assertoor:${{ github.sha }};${{ env.REGISTRY }}/${{ env.REPOSITORY}}/geth:antithesis-assertions;docker.io/chainsafe/lodestar:v1.22.0;
+        config_image: ${{ inputs.config_image }}
+        images: ${{ inputs.images }}
         description: ${{ inputs.description }}
         email_recipients: ${{ inputs.email }}
         test_name: ${{ inputs.test}}
