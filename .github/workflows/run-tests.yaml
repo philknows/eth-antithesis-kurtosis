@@ -15,12 +15,12 @@ on:
       config_image:
         description: 'Config image'
         required: true
-        default: ${{ env.REGISTRY }}/${{ env.REPOSITORY}}/config:antithesis-latest
+        default: us-central1-docker.pkg.dev/molten-verve-216720/ethereum-repository/config:antithesis-latest
         type: string
       images:
         description: 'System images'
         required: true
-        default: ${{ env.REGISTRY }}/${{ env.REPOSITORY}}/assertoor:antithesis-lates;${{ env.REGISTRY }}/${{ env.REPOSITORY}}/geth:antithesis-assertions;docker.io/chainsafe/lodestar:v1.22.0
+        default: us-central1-docker.pkg.dev/molten-verve-216720/ethereum-repository/assertoor:antithesis-lates;us-central1-docker.pkg.dev/molten-verve-216720/ethereum-repository/geth:antithesis-assertions;docker.io/chainsafe/lodestar:v1.22.0
         type: string
       duration:
         description: 'Duration (exploration hours)'
