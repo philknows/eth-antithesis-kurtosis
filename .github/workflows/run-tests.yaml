@@ -18,7 +18,7 @@ on:
         default: us-central1-docker.pkg.dev/molten-verve-216720/ethereum-repository/config:antithesis-latest
         type: string
       images:
-        description: 'System images'
+        description: 'System images (separate with ;)'
         required: true
         default: us-central1-docker.pkg.dev/molten-verve-216720/ethereum-repository/assertoor:antithesis-lates;us-central1-docker.pkg.dev/molten-verve-216720/ethereum-repository/geth:antithesis-assertions;docker.io/chainsafe/lodestar:v1.22.0
         type: string
