@@ -1,0 +1,17 @@
+participants:
+  - el_type: nethermind
+    el_image: nethermindeth/nethermind:release-1.28.0
+    cl_type: lodestar
+    cl_image: chainsafe/lodestar:v1.22.0
+    count: 1
+network_params: 
+  preset: "minimal"
+additional_services:
+  - assertoor
+assertoor_params:
+  image: ethereum-repository/assertoor:antithesis-latest
+  run_stability_check: false   
+  run_block_proposal_check: false
+  tests: 
+  - { file: "antithesis/tests/stability-check.yaml", id: "stability-check", config: { "minFinalizedEpochs": 2, "maxUnfinalizedEpochs": 4}}
+  - { file: "antithesis/tests/workload-mix.yaml", id: "workload-mix", config: { "txCount": 2, "blobCount": 2, "blobSidecars": 2}}
