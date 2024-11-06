@@ -20,7 +20,7 @@ on:
       images:
         description: 'System images (separate with ;)'
         required: true
-        default: us-central1-docker.pkg.dev/molten-verve-216720/ethereum-repository/assertoor:antithesis-latest;us-central1-docker.pkg.dev/molten-verve-216720/ethereum-repository/geth:antithesis-assertions;docker.io/chainsafe/lodestar:v1.22.0
+        default: us-central1-docker.pkg.dev/molten-verve-216720/ethereum-repository/assertoor:antithesis-latest;us-central1-docker.pkg.dev/molten-verve-216720/ethereum-repository/prysm-beacon-chain:antithesis-assertions;us-central1-docker.pkg.dev/molten-verve-216720/ethereum-repository/prysm-validator:antithesis-assertions;us-central1-docker.pkg.dev/molten-verve-216720/ethereum-repository/geth:antithesis-assertions
         type: string
       duration:
         description: 'Duration (exploration hours)'
@@ -31,7 +31,7 @@ on:
         description: 'Configuration file'
         required: true
         type: string
-        default: ".github/tests/minimal.yaml"
+        default: ".github/tests/prysm-geth-assertions.yaml"
       description:
         description: 'Test run description (avoid quotes, please!)'
         required: true
