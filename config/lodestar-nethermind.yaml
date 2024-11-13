@@ -2,7 +2,7 @@ participants:
   - el_type: nethermind
     el_image: nethermindeth/nethermind:release-1.28.0
     cl_type: lodestar
-    cl_image: chainsafe/lodestar:v1.22.0
+    cl_image: chainsafe/lodestar:v1.23.0
     count: 1
 network_params: 
   preset: "minimal"
